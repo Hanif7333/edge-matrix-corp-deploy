@@ -1,0 +1,14 @@
+export { HeroSection } from './hero-section';
+export { StatsSection } from './stats-section';
+export { AboutIndustrySection } from './about-industry-section';
+export { ServicesOverviewSection } from './services-overview-section';
+export { VisionAISection } from './vision-ai-section';
+export { VoiceAISection } from './voice-ai-section';
+export { RoboticsSection } from './robotics-section';
+export { PredictiveAnalyticsSection } from './predictive-analytics-section';
+export { GlobalPresenceSection } from './global-presence-section';
+export { TrainingsSection } from './trainings-section';
+export { TestimonialsSection } from './testimonials-section';
+export { CTASection } from './cta-section';
+export { ClientsSection } from './clients-section';
+export { InnovationSection } from './innovation-section';

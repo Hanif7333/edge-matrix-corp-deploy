@@ -1,0 +1,754 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ╔══════════════════════════════════════════════════════════════════════════╗
+   ║  Edge Matrix Corporation — Enterprise Design System v3 (Dark)           ║
+   ║                                                                         ║
+   ║  Color System:                                                          ║
+   ║  • Background: Deep Black (#000000 → #0a0a0a)                          ║
+   ║  • Typography: Crisp White (#F4F4F5)                                   ║
+   ║  • Accents: Enterprise Red (#E60026)                                   ║
+   ╚══════════════════════════════════════════════════════════════════════════╝ */
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   1. DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Brand Color System (LIGHT OVERRIDES) ────────────────────────────── */
+  --em-bg: #FFFFFF;
+  --em-surface: #FAFAFA;
+  --em-surface-light: #F4F4F5;
+  --em-surface-lighter: #E4E4E7;
+  --em-primary: #E60026;
+  --em-primary-light: #FF2A4B;
+  --em-primary-dark: #B3001B;
+  --em-accent: #0A0B0D;
+  --em-accent-light: #1A1D24;
+  --em-highlight: #E60026;
+  --em-highlight-light: #FF2A4B;
+  --em-success: #0A0B0D;
+  --em-warning: #71717A;
+  --em-danger: #E60026;
+  --em-text: #0A0B0D;
+  --em-text-secondary: #27272A;
+  --em-text-muted: #71717A;
+
+  /* ─── Border System ─────────────────────────────────────────────────── */
+  --em-border: rgba(10, 11, 13, 0.08);
+  --em-border-light: rgba(10, 11, 13, 0.12);
+  --em-border-medium: rgba(10, 11, 13, 0.22);
+
+  /* ─── Glow System ───────────────────────────────────────────────────── */
+  --em-glow-primary: rgba(230, 0, 38, 0.06);
+  --em-glow-primary-strong: rgba(230, 0, 38, 0.12);
+  --em-glow-accent: rgba(10, 11, 13, 0.02);
+  --em-glow-highlight: rgba(230, 0, 38, 0.06);
+
+  /* ─── Hero Mask System ──────────────────────────────────────────────── */
+  --hero-mask-1: rgba(255, 255, 255, 0.15);
+  --hero-mask-2: rgba(255, 255, 255, 0.55);
+  --hero-mask-3: rgba(255, 255, 255, 0.85);
+
+  /* ─── Typography ────────────────────────────────────────────────────── */
+  --font-heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* ─── Spacing Scale (8px grid) ──────────────────────────────────────── */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+
+  /* ─── Section Spacing ───────────────────────────────────────────────── */
+  --section-padding: clamp(4rem, 8vw, 8rem);
+  --section-gap: clamp(2rem, 5vw, 4rem);
+
+  /* ─── Container Widths ──────────────────────────────────────────────── */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-max: 1440px;
+  --container-wide: 1680px;
+
+  /* ─── Transition System ─────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.42, 0, 0.58, 1);
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.77, 0, 0.175, 1);
+
+  --transition-instant: 150ms var(--ease-out);
+  --transition-fast: 200ms var(--ease-out);
+  --transition-normal: 400ms var(--ease-out);
+  --transition-slow: 600ms var(--ease-cinematic);
+
+  /* ─── Shadow System (Light Optimized) ───────────────────────────────── */
+  --shadow-sm: 0 1px 2px rgba(10, 11, 13, 0.05);
+  --shadow-md: 0 4px 12px rgba(10, 11, 13, 0.08);
+  --shadow-lg: 0 8px 30px rgba(10, 11, 13, 0.12);
+  --shadow-xl: 0 20px 60px rgba(10, 11, 13, 0.16);
+  --shadow-glow-primary: 0 0 40px rgba(230, 0, 38, 0.08);
+  --shadow-glow-accent: 0 0 40px rgba(10, 11, 13, 0.04);
+
+  /* ─── Z-Index Scale ─────────────────────────────────────────────────── */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 20;
+  --z-sticky: 30;
+  --z-overlay: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+
+  /* ─── Border Radius Scale ───────────────────────────────────────────── */
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.25rem;   /* 20px */
+  --radius-full: 9999px;
+
+  /* ─── shadcn/ui Theme Overrides (LIGHT THEME) ───────────────────────── */
+  --background: #FFFFFF;
+  --foreground: #0A0B0D;
+  --card: #FFFFFF;
+  --card-foreground: #0A0B0D;
+  --popover: #FFFFFF;
+  --popover-foreground: #0A0B0D;
+  --primary: #E60026;
+  --primary-foreground: #FFFFFF;
+  --secondary: #FAFAFA;
+  --secondary-foreground: #0A0B0D;
+  --muted: #FAFAFA;
+  --muted-foreground: #71717A;
+  --accent: #E60026;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E60026;
+  --border: rgba(10, 11, 13, 0.08);
+  --input: rgba(10, 11, 13, 0.12);
+  --ring: #E60026;
+  --radius: 0.75rem;
+
+  --chart-1: #E60026;
+  --chart-2: #FF2A4B;
+  --chart-3: #B3001B;
+  --chart-4: #0A0B0D;
+  --chart-5: #71717A;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   2. TAILWIND THEME INTEGRATION
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme inline {
+  /* shadcn/ui mappings */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-heading: var(--font-heading);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* Edge Matrix brand colors for Tailwind */
+  --color-em-bg: var(--em-bg);
+  --color-em-surface: var(--em-surface);
+  --color-em-surface-light: var(--em-surface-light);
+  --color-em-primary: var(--em-primary);
+  --color-em-primary-light: var(--em-primary-light);
+  --color-em-primary-dark: var(--em-primary-dark);
+  --color-em-accent: var(--em-accent);
+  --color-em-highlight: var(--em-highlight);
+  --color-em-text: var(--em-text);
+  --color-em-text-secondary: var(--em-text-secondary);
+  --color-em-text-muted: var(--em-text-muted);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   3. BASE STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  /* ─── Keyboard Focus Accessibility Outline (WCAG 2.2 AA Compliance) ─── */
+  *:focus-visible {
+    outline: 2px solid var(--em-primary) !important;
+    outline-offset: 4px !important;
+  }
+
+  html {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+    /* ⚠ SCROLL GUARD: html must NEVER have height:100% or overflow:hidden.
+       Lenis v1.x uses native document scroll — capping html height to viewport
+       locks scroll and prevents reaching below-fold content. */
+    height: auto !important;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    /* overflow-x hidden only — never overflow-y:hidden on body */
+    overflow-x: hidden;
+    overflow-y: visible !important;
+    min-height: 100vh;
+    line-height: 1.6;
+    background-color: var(--em-bg);
+  }
+
+  /* ─── Typography Hierarchy ──────────────────────────────────────────── */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--em-text);
+  }
+
+  h1 { font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem); }
+  h2 { font-size: clamp(2rem, 3vw + 0.5rem, 3.5rem); }
+  h3 { font-size: clamp(1.5rem, 2vw + 0.25rem, 2rem); }
+  h4 { font-size: clamp(1.125rem, 1.5vw, 1.5rem); }
+
+  p {
+    line-height: 1.7;
+    color: var(--em-text-secondary);
+  }
+
+  ::selection {
+    background: rgba(255, 59, 87, 0.3);
+    color: #FFFFFF;
+  }
+
+  /* ─── Link Defaults ─────────────────────────────────────────────────── */
+  a {
+    transition: color var(--transition-fast);
+  }
+
+  /* Enforce cursor hiding only if fine-pointer device custom cursor is active */
+  .has-custom-cursor,
+  .has-custom-cursor * {
+    cursor: none !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   4. LAYOUT UTILITIES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer utilities {
+  /* ─── Container System ──────────────────────────────────────────────── */
+  .em-container {
+    max-width: var(--container-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  .em-container-wide {
+    max-width: var(--container-wide);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  .em-container-sm {
+    max-width: var(--container-sm);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(1rem, 4vw, 2rem);
+    padding-right: clamp(1rem, 4vw, 2rem);
+  }
+
+  /* ─── Section System ────────────────────────────────────────────────── */
+  .em-section {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    position: relative;
+  }
+
+  .em-section-sm {
+    padding-top: clamp(2rem, 4vw, 4rem);
+    padding-bottom: clamp(2rem, 4vw, 4rem);
+    position: relative;
+  }
+
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     5. VISUAL UTILITIES
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  /* ─── Text Gradients ────────────────────────────────────────────────── */
+  .em-text-gradient {
+    background: linear-gradient(135deg, #0A0B0D 10%, #E60026 60%, #FF2A4B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .em-text-gradient-primary {
+    background: linear-gradient(135deg, #0A0B0D 0%, #E60026 50%, #FF2A4B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .em-text-gradient-highlight {
+    background: linear-gradient(135deg, #E60026 0%, #FF2A4B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ─── Glassmorphism System (Light Rebalanced) ───────────────────────── */
+  .em-glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(10, 11, 13, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(10, 11, 13, 0.04);
+  }
+
+  .em-glass-strong {
+    background: rgba(255, 255, 255, 0.90);
+    backdrop-filter: blur(24px) saturate(200%);
+    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(10, 11, 13, 0.12);
+    box-shadow: 0 12px 40px 0 rgba(10, 11, 13, 0.06);
+  }
+
+  .em-glass-hover {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(10, 11, 13, 0.08);
+    transition: all var(--transition-normal);
+  }
+
+  .em-glass-hover:hover {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(230, 0, 38, 0.35);
+    box-shadow: 0 12px 40px rgba(230, 0, 38, 0.08);
+  }
+
+  /* ─── Glow Effects ──────────────────────────────────────────────────── */
+  .em-glow-primary {
+    box-shadow: 0 0 60px var(--em-glow-primary), 0 0 120px rgba(230, 0, 38, 0.02);
+  }
+
+  .em-glow-accent {
+    box-shadow: 0 0 60px var(--em-glow-accent);
+  }
+
+  .em-glow-highlight {
+    box-shadow: 0 0 60px var(--em-glow-highlight), 0 0 120px rgba(230, 0, 38, 0.02);
+  }
+
+  /* ─── Background Patterns (Light) ────────────────────────────────────── */
+  .em-grid-bg {
+    background-image:
+      linear-gradient(rgba(10, 11, 13, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10, 11, 13, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  .em-grid-bg-dense {
+    background-image:
+      linear-gradient(rgba(10, 11, 13, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(10, 11, 13, 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+
+  .em-dots-bg {
+    background-image: radial-gradient(circle, rgba(10, 11, 13, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* ─── Dividers ──────────────────────────────────────────────────────── */
+  .em-divider {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 59, 87, 0.4) 50%,
+      transparent 100%
+    );
+  }
+
+  .em-divider-subtle {
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent 100%
+    );
+  }
+
+  /* ─── Surface Patterns ──────────────────────────────────────────────── */
+  .em-surface-raised {
+    background: var(--em-surface);
+    border: 1px solid var(--em-border);
+    border-radius: var(--radius-xl);
+  }
+
+  .em-surface-interactive {
+    background: var(--em-surface);
+    border: 1px solid var(--em-border);
+    border-radius: var(--radius-xl);
+    transition: all var(--transition-normal);
+    cursor: none;
+  }
+
+  .em-surface-interactive:hover {
+    background: var(--em-surface-light);
+    border-color: var(--em-border-light);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* ─── Vision AI HUD ──────────────────────────────────────────────────── */
+  .em-hud-corner {
+    position: relative;
+  }
+
+  .em-hud-corner::before,
+  .em-hud-corner::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: rgba(230, 0, 38, 0.7);
+    border-style: solid;
+  }
+
+  .em-hud-corner::before {
+    top: 0;
+    left: 0;
+    border-width: 1.5px 0 0 1.5px;
+  }
+
+  .em-hud-corner::after {
+    bottom: 0;
+    right: 0;
+    border-width: 0 1.5px 1.5px 0;
+  }
+
+  /* ─── 3D Flip Card System ───────────────────────────────────────────── */
+  .em-perspective-1000 {
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+  }
+
+  .em-preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+  }
+
+  .em-backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .em-rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   6. ANIMATION KEYFRAMES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes em-gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes em-pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes em-pulse-glow-slow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.08); }
+}
+
+@keyframes em-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes em-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes em-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes em-line-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-33.333%); }
+}
+
+@keyframes float-down {
+  0% { transform: translateY(-33.333%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes scanline-sweep {
+  0%   { background-position: 0 -100%; }
+  100% { background-position: 0 200%; }
+}
+
+/* ─── Vision AI Scan Line ───────────────────────────────────────────────── */
+@keyframes scan-line {
+  0% { top: 0%; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes scan-line-horiz {
+  0% { left: 0%; opacity: 0; }
+  5% { opacity: 1; }
+  95% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+
+/* ─── Bounding Box Pulse ────────────────────────────────────────────────── */
+@keyframes bbox-pulse {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 6px rgba(255, 59, 87, 0.3); }
+  50% { opacity: 1; box-shadow: 0 0 12px rgba(255, 59, 87, 0.6); }
+}
+
+/* ─── Tracking Dot ──────────────────────────────────────────────────────── */
+@keyframes track-ping {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+/* ─── Data Stream ───────────────────────────────────────────────────────── */
+@keyframes data-stream {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* ─── Corner flash ──────────────────────────────────────────────────────── */
+@keyframes corner-flash {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+
+.animate-gradient-shift {
+  animation: em-gradient-shift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+.animate-pulse-glow {
+  animation: em-pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow-slow {
+  animation: em-pulse-glow-slow 8s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: em-float 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: em-spin-slow 20s linear infinite;
+}
+
+.animate-shimmer {
+  animation: em-shimmer 2s linear infinite;
+  background-size: 200% 100%;
+}
+
+.animate-scan-line {
+  animation: scan-line 2.5s ease-in-out infinite;
+}
+
+.animate-scan-horiz {
+  animation: scan-line-horiz 3s ease-in-out infinite;
+}
+
+.animate-bbox-pulse {
+  animation: bbox-pulse 2s ease-in-out infinite;
+}
+
+.animate-track-ping {
+  animation: track-ping 1.5s ease-out infinite;
+}
+
+.animate-data-stream {
+  animation: data-stream 4s linear infinite;
+}
+
+.animate-corner-flash {
+  animation: corner-flash 2s ease-in-out infinite;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   7. SCROLLBAR & FOCUS STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFFFF;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(230, 0, 38, 0.2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(230, 0, 38, 0.4);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(230, 0, 38, 0.2) #FFFFFF;
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--em-primary);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   8. REDUCED MOTION (Accessibility)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   9. TOUCH DEVICE CURSOR RESET
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (pointer: coarse) {
+  html, body, a, button, [role="button"] {
+    cursor: auto;
+  }
+}
+/* ═══════════════════════════════════════════════════════════════════════════
+   10. ZOOM & LAYOUT STABILITY FIX (100% vs 125% Consistency)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  /* Prevent unexpected text reflows & layout stretching during zoom changes */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    max-width: 100vw;
+  }
+
+  /* Ensure root container wrappers maintain fixed desktop layout scaling */
+  .em-container {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
